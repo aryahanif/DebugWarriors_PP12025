@@ -2,7 +2,7 @@ package entity;
 
 import util.PreOrderUtils;
 
-class PreOrder{
+public class PreOrder{
     private String orderId;
     private String customerName;
     private String productName;
