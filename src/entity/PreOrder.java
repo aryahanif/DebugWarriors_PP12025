@@ -1,3 +1,7 @@
+package entity;
+
+import util.PreOrderUtils;
+
 class PreOrder{
     private String orderId;
     private String customerName;
