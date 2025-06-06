@@ -1,0 +1,8 @@
+# Abaikan folder konfigurasi IntelliJ
+.idea/
+
+# Abaikan file project IntelliJ
+*.iml
+
+# Abaikan folder hasil compile
+out/
