@@ -1,5 +1,8 @@
 package Services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Entities.AntrianPreOrder;
 
 public class PreOrderQueue {
@@ -54,13 +57,35 @@ public class PreOrderQueue {
         return data;
     }
 
-
     // Melihat antrian terdepan tanpa mengeluarkan
     public AntrianPreOrder peekFront() {
         if (isEmpty()) {
             return null;
         }
         return antrianArray[front];
+    }
+
+    // Cari berdasarkan nomor antrian
+    public AntrianPreOrder searchByNomorAntrian(String nomor) {
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % capacity;
+            if (antrianArray[index].getNomorAntrian().equalsIgnoreCase(nomor)) {
+                return antrianArray[index];
+            }
+        }
+        return null;
+    }
+
+    // Cari berdasarkan nama customer
+    public List<AntrianPreOrder> searchAllByNamaCustomer(String nama) {
+        List<AntrianPreOrder> hasil = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            int index = (front + i) % capacity;
+            if (antrianArray[index].getCustomer().getNamaCust().equalsIgnoreCase(nama)) {
+                hasil.add(antrianArray[index]);
+            }
+        }   
+        return hasil;
     }
 
     // Menampilkan semua data dalam antrian
