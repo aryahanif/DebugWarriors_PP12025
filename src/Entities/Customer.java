@@ -16,7 +16,6 @@ public class Customer {
         this.waktuPesan = LocalDateTime.now(); 
     }
 
-
     public String getNamaCust() {
         return nama;
     }
