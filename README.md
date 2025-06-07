@@ -4,4 +4,4 @@ Sebuah aplikasi sederhana untuk mencatat dan mengelola pre-order PS5 menggunakan
 
 ## Cara Menjalankan
 - Compile seluruh file di dalam folder `src/`
-- Jalankan `Main.java` sebagai entry point
+- Jalankan `PreOrderApp` sebagai entry point
