@@ -1,6 +1,8 @@
 package Entities;
 
-public class PS5Model {
+import java.io.Serializable;
+
+public class PS5Model implements Serializable {
     private String namaModel;
     private double harga;
 
