@@ -7,6 +7,7 @@ public class MenuDisplay {
         System.out.println("1. Pre-Order Baru");
         System.out.println("2. Proses Pre-Order");
         System.out.println("3. Lihat Seluruh Antrian Pre-Order");
+        System.out.println("4. Lihat Antrian Selanjutnya (Paling Depan)");
         System.out.println("0. Keluar");
         System.out.println("================================");
     }
