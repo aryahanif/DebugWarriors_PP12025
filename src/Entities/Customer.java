@@ -1,9 +1,10 @@
 package Entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Customer {
+public class Customer implements Serializable {
     private String nama, noKontak, alamat;
 
     private LocalDateTime waktuPesan; 

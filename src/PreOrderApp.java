@@ -9,12 +9,18 @@ import java.time.format.DateTimeFormatter;
 
 public class PreOrderApp {
 
+    private static final String DATA_FILE = "src/Util/data_preorder.ser";
+
     public static void main(String[] args) {
-        // Kapasitas antrian bisa sesuai kebutuhan
+        // Buat antrian dengan kapasitas tertentu
         PreOrderQueue queue = new PreOrderQueue(10);
+
+        // Coba muat data jika ada
+        queue.loadFromFile(DATA_FILE);
 
         while (true) {
             MenuDisplay.MainMenuDisplay();
+
             int choice = InputUtil.inputInt("Pilih menu: ");
 
             switch (choice) {
@@ -31,12 +37,46 @@ public class PreOrderApp {
                     AntrianPreOrder antrianDepan = queue.peekFront();
                     if (antrianDepan != null) {
                         System.out.println("\nAntrian Selanjutnya (Paling Depan):");
-                        System.out.println(antrianDepan.toString());
+                        System.out.println(antrianDepan);
                     } else {
                         System.out.println("Tidak ada antrian yang tersedia.");
                     }
                     break;
+                case 5:
+                    String nomor = InputUtil.inputString("Masukkan Nomor Antrian: ");
+                    AntrianPreOrder hasilNomor = queue.searchByNomorAntrian(nomor);
+                    if (hasilNomor != null) {
+                        System.out.println("Ditemukan:");
+                        System.out.println(hasilNomor);
+                    } else {
+                        System.out.println("Data tidak ditemukan dengan nomor antrian tersebut.");
+                    }
+                    break;
+                case 6:
+                    String nama = InputUtil.inputString("Masukkan Nama Customer: ");
+                    AntrianPreOrder[] hasilNama = queue.searchByNamaCustomer(nama);
+                    if (hasilNama.length > 0) {
+                        System.out.println("Ditemukan " + hasilNama.length + " data:");
+                        for (AntrianPreOrder item : hasilNama) {
+                            System.out.println(item);
+                        }
+                    } else {
+                        System.out.println("Data tidak ditemukan dengan nama tersebut.");
+                    }
+                    break;
+
+                case 7:
+                    queue.saveToFile(DATA_FILE);
+                    break;
+                case 8:
+                    queue.loadFromFile(DATA_FILE);
+                    break;
+                case 9:
+                    queue.displayRiwayat();
+                    break;
                 case 0:
+                    // Simpan data sebelum keluar
+                    queue.saveToFile(DATA_FILE);
                     System.out.println("Terima kasih telah menggunakan aplikasi. Sampai jumpa!");
                     System.exit(0);
                     break;
@@ -46,7 +86,6 @@ public class PreOrderApp {
         }
     }
 
-    
     private static void tambahAntrianBaru(PreOrderQueue queue) {
         if (queue.isFull()) {
             System.out.println("MAAF: Antrian sudah penuh, tidak bisa menambah data baru.");
@@ -61,7 +100,7 @@ public class PreOrderApp {
 
         MenuDisplay.MenuModelPS5();
         int modelChoice = InputUtil.inputInt("Pilih model PS5: ");
-        PS5Model ps5Model = null;
+        PS5Model ps5Model;
 
         switch (modelChoice) {
             case 1:
@@ -81,7 +120,6 @@ public class PreOrderApp {
                 return;
         }
 
-        // Membuat nomor antrian unik
         String nomorAntrian = "PS5-" + (queue.size() + 1);
         String waktuMasuk = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
@@ -89,19 +127,16 @@ public class PreOrderApp {
         queue.enqueue(antrianBaru);
 
         System.out.println("\nSUKSES! Pre-order berhasil ditambahkan ke antrian.");
-        System.out.println(antrianBaru.toString());
+        System.out.println(antrianBaru);
     }
 
     private static void prosesAntrian(PreOrderQueue queue) {
         AntrianPreOrder antrianDiproses = queue.dequeue();
 
         if (antrianDiproses != null) {
-            // Ubah statusnya
-            antrianDiproses.setStatus("SELESAI DIPROSES"); // Status diubah
-
             System.out.println("\n--- Memproses Antrian ---");
             System.out.println("Data berikut telah selesai diproses:");
-            System.out.println(antrianDiproses.toString()); // menampilkan status "SELESAI DIPROSES"
+            System.out.println(antrianDiproses);
         }
     }
 }

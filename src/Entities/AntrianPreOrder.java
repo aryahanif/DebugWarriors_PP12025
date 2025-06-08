@@ -1,6 +1,8 @@
 package Entities;
 
-public class AntrianPreOrder {
+import java.io.Serializable;
+
+public class AntrianPreOrder implements Serializable {
     private Customer customer;
     private PS5Model model;
     private String nomorAntrian;
