@@ -27,6 +27,15 @@ public class PreOrderApp {
                 case 3:
                     queue.displayAntrian();
                     break;
+                case 4:
+                    AntrianPreOrder antrianDepan = queue.peekFront();
+                    if (antrianDepan != null) {
+                        System.out.println("\nAntrian Selanjutnya (Paling Depan):");
+                        System.out.println(antrianDepan.toString());
+                    } else {
+                        System.out.println("Tidak ada antrian yang tersedia.");
+                    }
+                    break;
                 case 0:
                     System.out.println("Terima kasih telah menggunakan aplikasi. Sampai jumpa!");
                     System.exit(0);
@@ -37,7 +46,7 @@ public class PreOrderApp {
         }
     }
 
-
+    
     private static void tambahAntrianBaru(PreOrderQueue queue) {
         if (queue.isFull()) {
             System.out.println("MAAF: Antrian sudah penuh, tidak bisa menambah data baru.");
